@@ -1,0 +1,53 @@
+.home__container {
+  text-align: center;
+}
+
+.home__header {
+  display: flex;
+  color: white;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #282c34;
+  font-size: calc(10px + 2vmin);
+}
+
+.home__logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.home__button {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 0.4em;
+  font-family: inherit;
+  padding: 0.6em 1.3em;
+  background: #fb1f1f;
+  box-shadow: 0.1em 0.1em;
+  border: 3px solid black;
+  text-transform: uppercase;
+}
+
+.home__button:hover {
+  box-shadow: 0.15em 0.15em;
+  transform: translate(-0.05em, -0.05em);
+}
+
+@keyframes home__logo--spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home__logo {
+    animation: home__logo--spin infinite 20s linear;
+  }
+}
