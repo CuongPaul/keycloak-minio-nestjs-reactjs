@@ -3,7 +3,6 @@ import { useKeycloak } from "@react-keycloak/web";
 
 import "./index.css";
 import { Loading } from "../../components";
-import logo from "../../assets/images/logo.svg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const Home = () => {
   return (
     <div className="home__container">
       <header className="home__header">
-        <img alt="logo" src={logo} className="home__logo" />
+        <img alt="logo" src={"logo.svg"} className="home__logo" />
         <h1>
           Welcome,{" "}
           {keycloak.authenticated ? keycloak.tokenParsed?.name : "Guest"}

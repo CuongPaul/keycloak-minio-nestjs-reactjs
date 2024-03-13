@@ -14,4 +14,4 @@ Rename .env.example file to .env
 
 ## 3. Run application
 
-#### `npm run start`
+#### `npm start`

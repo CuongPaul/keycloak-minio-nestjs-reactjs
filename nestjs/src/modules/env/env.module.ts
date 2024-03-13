@@ -1,14 +1,14 @@
 import * as Joi from 'joi';
+import { ConfigModule } from '@nestjs/config';
 import { Module, DynamicModule } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class EnvModule {
   static register(): DynamicModule {
     return {
       exports: [],
+      providers: [],
       module: EnvModule,
-      providers: [ConfigService],
       imports: [
         ConfigModule.forRoot({
           cache: true,
@@ -17,6 +17,10 @@ export class EnvModule {
           validationOptions: { abortEarly: false },
           validationSchema: Joi.object({
             PORT: Joi.number().default(4001),
+            KEYCLOAK_URL: Joi.string().required(),
+            KEYCLOAK_REALM: Joi.string().required(),
+            KEYCLOAK_SECRET: Joi.string().allow(''),
+            KEYCLOAK_CLIENT_ID: Joi.string().required(),
             NODE_ENV: Joi.string()
               .valid('test', 'staging', 'production', 'development')
               .default('development'),

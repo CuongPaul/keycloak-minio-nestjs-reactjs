@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web";
 
 import "./index.css";
-import avatar from "../../assets/images/a-boy-simple-avatar.webp";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/user/check-token`, {
+      .get(`${process.env.REACT_APP_API_BASE_URL}`, {
         headers: { Authorization: `Bearer ${keycloak.token}` },
       })
       .then((res) => console.log(res.data))
@@ -23,7 +22,7 @@ const Profile = () => {
     <div className="profile__container">
       <div className="profile__card">
         <div className="card__avatar">
-          <img alt="avatar" src={avatar} />
+          <img alt="avatar" src="images/a-boy-simple-avatar.webp" />
         </div>
         <div className="card__title">{keycloak.tokenParsed?.name}</div>
         <div className="card__subtitle">{keycloak.tokenParsed?.email}</div>
