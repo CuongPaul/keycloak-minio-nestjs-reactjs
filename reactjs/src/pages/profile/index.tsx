@@ -22,7 +22,12 @@ const Profile = () => {
     <div className="profile__container">
       <div className="profile__card">
         <div className="card__avatar">
-          <img alt="avatar" src="images/a-boy-simple-avatar.webp" />
+          <img
+            alt="avatar"
+            src={
+              keycloak.tokenParsed?.avatar || "images/a-boy-simple-avatar.webp"
+            }
+          />
         </div>
         <div className="card__title">{keycloak.tokenParsed?.name}</div>
         <div className="card__subtitle">{keycloak.tokenParsed?.email}</div>
