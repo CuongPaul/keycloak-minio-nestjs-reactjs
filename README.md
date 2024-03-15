@@ -26,6 +26,7 @@
   - **Client scopes** -> **profile** -> **Mappers** -> **Add mappers** -> **By configuration** -> **User Attribute**
     - Name: **_avatar_**
     - User Attribute: **_avatar_**
+    - Token Claim Name: **_avatar_**
 
 - Config realm
   - **Realm settings** -> **Login** -> **Login screen customization**
