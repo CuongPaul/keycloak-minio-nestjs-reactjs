@@ -16,6 +16,7 @@
 - Create client
 - Config client
   - **Clients** -> **Settings** -> **Access settings**
+    - Home URL: **_http://localhost:3001/_**
     - Valid redirect URIs: **_http://localhost:3001/\*_**
     - Valid post logout redirect URIs: **_http://localhost:3001/\*_**
     - Web origin: **_http://localhost:3001_**
