@@ -19,6 +19,7 @@
 
 .card__avatar {
   margin: 30px;
+  cursor: pointer;
 }
 
 .card__avatar img {

@@ -24,6 +24,7 @@ const Profile = () => {
         <div className="card__avatar">
           <img
             alt="avatar"
+            onClick={() => keycloak.accountManagement()}
             src={
               keycloak.tokenParsed?.avatar || "images/a-boy-simple-avatar.webp"
             }
