@@ -17,8 +17,8 @@
 - Config client
   - **Clients** -> **Settings** -> **Access settings**
     - Home URL: **_http://localhost:3001/_**
-    - Valid redirect URIs: **_http://localhost:3001/\*_**
-    - Valid post logout redirect URIs: **_http://localhost:3001/\*_**
+    - Valid redirect URIs: **_http://localhost:3001/*_**
+    - Valid post logout redirect URIs: **_http://localhost:3001/*_**
     - Web origin: **_http://localhost:3001_**
   - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_user_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
   - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_admin_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
