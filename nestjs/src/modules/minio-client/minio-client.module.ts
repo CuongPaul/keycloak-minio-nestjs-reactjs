@@ -6,7 +6,7 @@ import { MinioClientService } from './minio-client.service';
 
 @Module({
   exports: [MinioClientService],
-  providers: [MinioClientService],
+  providers: [ConfigService, MinioClientService],
   imports: [
     MinioModule.registerAsync({
       imports: [ConfigModule],

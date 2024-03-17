@@ -5,6 +5,7 @@ import {
   KeycloakConnectModule,
 } from 'nest-keycloak-connect';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { AppService } from './app.service';
@@ -30,6 +31,7 @@ import { GlobalExceptionFilter } from './exception-filters/global-exception.filt
   ],
   providers: [
     AppService,
+    ConfigService,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_GUARD, useClass: RoleGuard },
     { provide: APP_GUARD, useClass: ResourceGuard },

@@ -12,7 +12,7 @@ export class EnvModule {
       imports: [
         ConfigModule.forRoot({
           cache: true,
-          isGlobal: true,
+          // isGlobal: true,
           expandVariables: true,
           validationOptions: { abortEarly: false },
           validationSchema: Joi.object({
