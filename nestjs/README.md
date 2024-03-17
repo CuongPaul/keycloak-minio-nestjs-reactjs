@@ -6,7 +6,7 @@ Node: 21.1.0
 
 ### 1. Config enviroment variable
 
-Rename .env.dev file to .env
+Rename .env.example file to .env.dev
 
 ### 2. Install dependencies
 

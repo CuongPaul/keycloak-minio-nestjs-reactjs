@@ -17,6 +17,11 @@ export class EnvModule {
           validationOptions: { abortEarly: false },
           validationSchema: Joi.object({
             PORT: Joi.number().default(4001),
+            MINIO_BUCKET: Joi.string().required(),
+            MINIO_PORT: Joi.number().default(9000),
+            MINIO_ENDPOINT: Joi.string().required(),
+            MINIO_ACCESS_KEY: Joi.string().required(),
+            MINIO_SECRET_KEY: Joi.string().required(),
             KEYCLOAK_URL: Joi.string().required(),
             KEYCLOAK_REALM: Joi.string().required(),
             KEYCLOAK_SECRET: Joi.string().allow(''),
