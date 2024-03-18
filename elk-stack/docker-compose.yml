@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.9.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./.docker/data/elasticsearch:/usr/share/elasticsearch/data
+      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=0.0.0.0
+      - bootstrap.memory_lock=true
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+
+  logstash:
+    image: logstash:7.9.1
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    volumes:
+      - ./.docker/data/logstash:/usr/share/logstash/data
+      - ./config/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: kibana:7.9.1
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./.docker/data/kibana:/usr/share/kibana/data
+      - ./config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch
