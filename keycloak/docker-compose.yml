@@ -25,7 +25,10 @@ services:
       KEYCLOAK_PASSWORD: Pa55w0rd
     ports:
       - 8080:8080
+    command:
+      - "-Dkeycloak.profile.feature.declarative_user_profile=enabled"
     volumes:
       - ./themes/custom:/opt/jboss/keycloak/themes/custom
+      - ./themes/base/account/account.ftl:/opt/jboss/keycloak/themes/base/account/account.ftl
     depends_on:
       - postgres
