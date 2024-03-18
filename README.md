@@ -30,6 +30,14 @@
     - Token Claim Name: **_avatar_**
 
 - Config realm
+  - **Realm settings** -> **General**
+    - User Profile Enabled: **On** (Enable this feature to show User profile tab)
+  - **Realm settings** -> **User profile** -> **Create attribute**
+    - Name: **avatar**
+    - Display name: **Avatar**
+    - Permission: **Avatar**
+      - Who can edit?: **User**
+      - Who can view?: **User**
   - **Realm settings** -> **Login** -> **Login screen customization**
     - User registration: **On**
     - Forgot password: **On**
