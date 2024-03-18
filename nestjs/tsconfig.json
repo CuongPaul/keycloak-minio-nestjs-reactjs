@@ -16,6 +16,12 @@
     "experimentalDecorators": true,
     "noFallthroughCasesInSwitch": false,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": false
+    "forceConsistentCasingInFileNames": false,
+    "paths": {
+      "@modules/*": ["src/modules/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@interceptors/*": ["src/interceptors/*"],
+      "@exception-filters/*": ["src/exception-filters/*"]
+    }
   }
 }

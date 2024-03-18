@@ -1,9 +1,6 @@
-import * as crypto from 'crypto';
 import { ConfigService } from '@nestjs/config';
 import { MinioClient, MinioService } from 'nestjs-minio-client';
 import { HttpStatus, Injectable, HttpException } from '@nestjs/common';
-
-import { BufferedFile } from './interfaces/buffered-file.interface';
 
 @Injectable()
 export class MinioClientService {
@@ -20,36 +17,44 @@ export class MinioClientService {
     this.port = this.configService.get('MINIO_PORT');
     this.bucket = this.configService.get('MINIO_BUCKET');
     this.endpoint = this.configService.get('MINIO_ENDPOINT');
+
+    const policy = {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { AWS: ['*'] },
+          Action: [
+            's3:ListBucket',
+            's3:GetBucketLocation',
+            's3:ListBucketMultipartUploads',
+          ],
+          Resource: ['arn:aws:s3:::bucket-demo'],
+        },
+        {
+          Effect: 'Allow',
+          Principal: { AWS: ['*'] },
+          Action: [
+            's3:GetObject',
+            's3:PutObject',
+            's3:DeleteObject',
+            's3:AbortMultipartUpload',
+            's3:ListMultipartUploadParts',
+          ],
+          Resource: ['arn:aws:s3:::bucket-demo/*'],
+        },
+      ],
+    };
+
+    this.client.setBucketPolicy(this.bucket, JSON.stringify(policy));
   }
 
-  public async upload(file: BufferedFile, bucket: string = this.bucket) {
-    const hashedFileName = crypto
-      .createHash('md5')
-      .update(Date.now().toString())
-      .digest('hex');
-    const ext = file.originalname.substring(
-      file.originalname.lastIndexOf('.'),
-      file.originalname.length,
-    );
-    const fileName = hashedFileName + ext;
-
-    this.client.putObject(bucket, fileName, file.buffer, (err) => {
+  public async upload(file: Express.Multer.File, bucket: string = this.bucket) {
+    this.client.putObject(bucket, file.originalname, file.buffer, (err) => {
       if (err)
         throw new HttpException('Error uploading file', HttpStatus.BAD_REQUEST);
     });
 
-    return {
-      url: `${this.endpoint}:${this.port}/${this.bucket}/${fileName}`,
-    };
-  }
-
-  async delete(objetName: string, bucket: string = this.bucket) {
-    this.client.removeObjects(bucket, [objetName], (err) => {
-      if (err)
-        throw new HttpException(
-          'Oops something wrong happend',
-          HttpStatus.BAD_REQUEST,
-        );
-    });
+    return `${this.endpoint}:${this.port}/${this.bucket}/${file.originalname}`;
   }
 }

@@ -9,18 +9,18 @@ import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { EnvModule } from './modules/env/env.module';
-import { KeycloakModule } from './modules/keycloak/keycloak.module';
-import { KeycloakService } from './modules/keycloak/keycloak.service';
-import { FileUploadModule } from './modules/file-upload/file-upload.module';
-import { TransformInterceptor } from './interceptors/transform.interceptor';
-import { MinioClientModule } from './modules/minio-client/minio-client.module';
-import { GlobalExceptionFilter } from './exception-filters/global-exception.filter';
+import { EnvModule } from '@modules/env/env.module';
+import { FileModule } from '@modules/file/file.module';
+import { KeycloakModule } from '@modules/keycloak/keycloak.module';
+import { KeycloakService } from '@modules/keycloak/keycloak.service';
+import { TransformInterceptor } from '@interceptors/transform.interceptor';
+import { MinioClientModule } from '@modules/minio-client/minio-client.module';
+import { GlobalExceptionFilter } from '@exception-filters/global-exception.filter';
 
 @Module({
   controllers: [AppController],
   imports: [
-    FileUploadModule,
+    FileModule,
     MinioClientModule,
     EnvModule.register(),
     KeycloakConnectModule.registerAsync({
