@@ -58,11 +58,12 @@
 
         <div class="form-group ${messagesPerField.printIfExists('avatar','has-error')}">
             <div class="col-sm-2 col-md-2">
-                <label for="avatar" class="control-label">${msg("avatar")}</label> <span class="required">*</span>
+                <label for="avatar" class="control-label">${msg("avatar")}</label>
             </div>
 
             <div class="col-sm-10 col-md-10">
-                <input type="text" class="form-control" id="avatar" name="avatar" value="${(account.attributes.avatar!'')}"/>
+                <img src="${(account.attributes.avatar!'')}" alt="User avatar" style="width:100%">
+                <input type="text" class="form-control-hidden" style="display:none" id="avatar" name="avatar" value="${(account.attributes.avatar!'')}"/>
             </div>
         </div>
 
