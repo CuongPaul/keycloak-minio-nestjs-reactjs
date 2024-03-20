@@ -17,4 +17,8 @@ export class FileService {
 
     return { urls };
   }
+
+  remove(fileName: string) {
+    return this.minioClientService.remove(fileName);
+  }
 }

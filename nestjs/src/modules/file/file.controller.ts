@@ -1,5 +1,7 @@
 import {
   Post,
+  Query,
+  Delete,
   Controller,
   UploadedFiles,
   UseInterceptors,
@@ -18,5 +20,10 @@ export class FileController {
   @UseInterceptors(FilesInterceptor('files'))
   upload(@UploadedFiles() files: Array<Express.Multer.File>) {
     return this.fileService.upload(files);
+  }
+
+  @Delete()
+  remove(@Query() query: { name: string }) {
+    return this.fileService.remove(query.name);
   }
 }

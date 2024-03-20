@@ -49,12 +49,16 @@ export class MinioClientService {
     this.client.setBucketPolicy(this.bucket, JSON.stringify(policy));
   }
 
-  public async upload(file: Express.Multer.File, bucket: string = this.bucket) {
+  upload(file: Express.Multer.File, bucket: string = this.bucket) {
     this.client.putObject(bucket, file.originalname, file.buffer, (err) => {
       if (err)
         throw new HttpException('Error uploading file', HttpStatus.BAD_REQUEST);
     });
 
     return `${this.endpoint}:${this.port}/${this.bucket}/${file.originalname}`;
+  }
+
+  remove(objetName: string, baseBucket: string = this.bucket) {
+    return this.client.removeObject(baseBucket, objetName);
   }
 }
