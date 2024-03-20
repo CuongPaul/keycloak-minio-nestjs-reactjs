@@ -28,6 +28,6 @@ services:
     command:
       - start-dev
     volumes:
-      - ./themes:/opt/keycloak/themes
+      - ./themes/custom-theme:/opt/keycloak/themes/custom-theme
     depends_on:
       - postgres

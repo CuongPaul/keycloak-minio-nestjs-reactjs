@@ -53,6 +53,9 @@
     - Password: **pzgp lkpb mgzw imri** (Go to [application password](https://myaccount.google.com/u/1/apppasswords?utm_source=google-account&utm_medium=myaccountsecurity&utm_campaign=tsv-settings&rapt=AEjHL5Plx2bKft72Pe59WiQvx0cqln1Ie44-gwHxFt6186SNJ9JlO-TgS_LuFVj1tg3WMyBPip4C6eyYgmaOYmfIThFHUgTaEsaHdUorT_VugxnnwwqFHgg) then create new application. Make sure that your Google account is enabled 2-step verification)
   - **Realm settings** -> **Themes**
     - Login theme: custom-theme
+  - **Realm settings** -> **User registration** -> **Assign role** -> **Filter by realm roles** -> **Filter by clients** -> **user**
+
+- Config indentity provides
   - **Identity providers** -> **Social** -> **Google**
     - Client ID: **942261247349-bjl1m8vog418evl4m0dhmvrrguh5jp26.apps.googleusercontent.com** (Obtaining from [Google Cloud Console](https://console.cloud.google.com))
     - Client Secret: **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** (Obtaining from [Google Cloud Console](https://console.cloud.google.com))
