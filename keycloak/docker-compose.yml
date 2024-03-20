@@ -13,22 +13,21 @@ services:
       - ./.docker/data/postgres:/var/lib/postgresql/data
 
   keycloak:
-    image: quay.io/keycloak/keycloak:legacy
+    image: quay.io/keycloak/keycloak:latest
     environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_USER: tacuong
-      DB_PASSWORD: 12345678
-      DB_DATABASE: keycloak
-      DB_SCHEMA: public
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: tacuong
+      KC_DB_PASSWORD: 12345678
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: Pa55w0rd
     ports:
       - 8080:8080
     command:
-      - "-Dkeycloak.profile.feature.declarative_user_profile=enabled"
+      - start-dev
     volumes:
-      - ./themes/custom:/opt/jboss/keycloak/themes/custom
-      - ./themes/base/account/account.ftl:/opt/jboss/keycloak/themes/base/account/account.ftl
+      - ./themes:/opt/keycloak/themes
     depends_on:
       - postgres
