@@ -16,15 +16,21 @@
 - [Create realm](http://localhost:8080/admin/master/console/#/master/add-realm)
 
 - Create client
-
-- Config client
-  - **Clients** -> **Settings** -> **Access settings**
-    - Home URL: **_http://localhost:3001/_**
-    - Valid redirect URIs: **_http://localhost:3001/*_**
-    - Valid post logout redirect URIs: **_http://localhost:3001/*_**
-    - Web origin: **_http://localhost:3001_**
-  - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_user_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
-  - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_admin_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
+  1. nest-demo
+      - **Clients** -> **Settings** -> **General settings**
+        - Client ID: **nest-demo**
+      - **Clients** -> **Settings** -> **Capability config**
+        - Client authentication: **On**
+      - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_user_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
+      - **Clients** -> **Roles** -> **Create role** -> **Role name** -> **_admin_** (It is used to assign role in **Users** -> **User details** -> **Role mapping**)
+  2. react-demo
+      - **Clients** -> **Settings** -> **General settings**
+        - Client ID: **react-demo**
+      - **Clients** -> **Settings** -> **Access settings**
+        - Home URL: **_http://localhost:3001/_**
+        - Valid redirect URIs: **_http://localhost:3001/*_**
+        - Valid post logout redirect URIs: **_http://localhost:3001/*_**
+        - Web origin: **_http://localhost:3001_**
 
 - Config client scopes
   - **Client scopes** -> **profile** -> **Mappers** -> **Add mappers** -> **By configuration** -> **User Attribute**
@@ -66,7 +72,6 @@
         - Application type: Web application
         - Authorized JavaScript origins: http://localhost:8080
         - Authorized redirect URIs: http://localhost:8080/realms/realm-demo/broker/google/endpoint
-
 
 ### 2. Minio
 

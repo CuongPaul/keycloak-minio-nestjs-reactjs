@@ -1,5 +1,6 @@
 import {
   TokenValidation,
+  PolicyEnforcementMode,
   KeycloakConnectOptions,
   KeycloakConnectOptionsFactory,
 } from 'nest-keycloak-connect';
@@ -12,9 +13,10 @@ export class KeycloakService implements KeycloakConnectOptionsFactory {
 
   createKeycloakConnectOptions(): KeycloakConnectOptions {
     return {
-      tokenValidation: TokenValidation.OFFLINE,
+      tokenValidation: TokenValidation.ONLINE,
       realm: this.configService.get('KEYCLOAK_REALM'),
       secret: this.configService.get('KEYCLOAK_SECRET'),
+      policyEnforcement: PolicyEnforcementMode.PERMISSIVE,
       authServerUrl: this.configService.get('KEYCLOAK_URL'),
       clientId: this.configService.get('KEYCLOAK_CLIENT_ID'),
     };
