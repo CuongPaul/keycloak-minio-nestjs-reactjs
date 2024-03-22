@@ -41,10 +41,10 @@
 - Config realm
   - **Realm settings** -> **User profile** -> **Create attribute**
     - Attribute [Name]: **avatar**
-    - Display name: **${avatar}**
+    - Display name: **${Avatar}**
     - Permission:
-      - Who can edit?: **User**
-      - Who can view?: **User**
+      - Who can edit?: **User** - **Admin**
+      - Who can view?: **User** - **Admin**
   - **Realm settings** -> **Login** -> **Login screen customization**
     - User registration: **On**
     - Forgot password: **On**
@@ -59,7 +59,7 @@
     - Password: **pzgp lkpb mgzw imri** (Go to [application password](https://myaccount.google.com/u/1/apppasswords?utm_source=google-account&utm_medium=myaccountsecurity&utm_campaign=tsv-settings&rapt=AEjHL5Plx2bKft72Pe59WiQvx0cqln1Ie44-gwHxFt6186SNJ9JlO-TgS_LuFVj1tg3WMyBPip4C6eyYgmaOYmfIThFHUgTaEsaHdUorT_VugxnnwwqFHgg) then create new application. Make sure that your Google account is enabled 2-step verification)
   - **Realm settings** -> **Themes**
     - Login theme: custom-theme
-  - **Realm settings** -> **User registration** -> **Assign role** -> **Filter by realm roles** -> **Filter by clients** -> **user**
+  - **Realm settings** -> **User registration** -> **Assign role** -> **Filter by clients** -> **nest-demo user**
 
 - Config indentity provides
   - **Identity providers** -> **Social** -> **Google**

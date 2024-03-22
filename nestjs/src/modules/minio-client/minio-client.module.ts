@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MinioModule } from 'nestjs-minio-client';
+import { NestMinioModule } from 'nestjs-minio';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { MinioClientService } from './minio-client.service';
@@ -8,7 +8,7 @@ import { MinioClientService } from './minio-client.service';
   exports: [MinioClientService],
   providers: [MinioClientService],
   imports: [
-    MinioModule.registerAsync({
+    NestMinioModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {

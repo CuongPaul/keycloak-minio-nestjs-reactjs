@@ -15,23 +15,35 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("files", e.target.files[0]);
 
+    if (avatarImage) {
+      const bucketName = "bucket-demo";
+      const endIndex = avatarImage.indexOf("?X-Amz-Algorithm=");
+      const startIndex =
+        avatarImage.indexOf(`/${bucketName}/`) + `/${bucketName}/`.length;
+
+      await axios.delete(
+        `${
+          process.env.REACT_APP_API_BASE_URL
+        }/file?name=${avatarImage.substring(startIndex, endIndex)}`
+      );
+    }
+
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_BASE_URL}/file/upload`,
-      formData,
-      { headers: { "content-type": "multipart/form-data" } }
+      `${process.env.REACT_APP_API_BASE_URL}/file`,
+      formData
     );
     setAvatarImage(data.data.urls[0]);
 
-    const res = await axios.post(
+    axios.post(
       `${process.env.REACT_APP_KEYCLOAK_URL}/realms/${process.env.REACT_APP_KEYCLOAK_REALM}/account`,
       {
         email: keycloak.tokenParsed?.email,
-        attributes: { avatar: data.data.urls },
+        attributes: { avatar: data.data.urls[0] },
         firstName: keycloak.tokenParsed?.given_name,
         lastName: keycloak.tokenParsed?.family_name,
-      }
+      },
+      { headers: { Authorization: `Bearer ${keycloak.token}` } }
     );
-    console.log(res);
   };
 
   useEffect(() => {
@@ -50,13 +62,14 @@ const Profile = () => {
           <input
             type="file"
             ref={fileRef}
+            accept=".png, .jpg, .jpeg"
             onChange={handleChangeFile}
             style={{ display: "none" }}
           />
           <img
             alt="avatar"
             onClick={() => fileRef.current.click()}
-            src={avatarImage || "images/a-boy-simple-avatar.webp"}
+            src={avatarImage || "images/simple-avatar.png"}
           />
         </div>
         <div

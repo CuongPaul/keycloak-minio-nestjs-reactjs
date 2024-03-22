@@ -1,64 +1,30 @@
+import { Client } from 'minio';
 import { ConfigService } from '@nestjs/config';
-import { MinioClient, MinioService } from 'nestjs-minio-client';
-import { HttpStatus, Injectable, HttpException } from '@nestjs/common';
+import { MINIO_CONNECTION } from 'nestjs-minio';
+import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MinioClientService {
-  private readonly port: number;
   private readonly bucket: string;
-  private readonly endpoint: string;
-  private readonly client: MinioClient;
 
   constructor(
     private readonly configService: ConfigService,
-    private readonly minioClientService: MinioService,
+    @Inject(MINIO_CONNECTION) private readonly minioClient: Client,
   ) {
-    this.client = this.minioClientService.client;
-    this.port = this.configService.get('MINIO_PORT');
     this.bucket = this.configService.get('MINIO_BUCKET');
-    this.endpoint = this.configService.get('MINIO_ENDPOINT');
-
-    const policy = {
-      Version: '2012-10-17',
-      Statement: [
-        {
-          Effect: 'Allow',
-          Principal: { AWS: ['*'] },
-          Action: [
-            's3:ListBucket',
-            's3:GetBucketLocation',
-            's3:ListBucketMultipartUploads',
-          ],
-          Resource: ['arn:aws:s3:::bucket-demo'],
-        },
-        {
-          Effect: 'Allow',
-          Principal: { AWS: ['*'] },
-          Action: [
-            's3:GetObject',
-            's3:PutObject',
-            's3:DeleteObject',
-            's3:AbortMultipartUpload',
-            's3:ListMultipartUploadParts',
-          ],
-          Resource: ['arn:aws:s3:::bucket-demo/*'],
-        },
-      ],
-    };
-
-    this.client.setBucketPolicy(this.bucket, JSON.stringify(policy));
   }
 
-  upload(file: Express.Multer.File, bucket: string = this.bucket) {
-    this.client.putObject(bucket, file.originalname, file.buffer, (err) => {
-      if (err)
-        throw new HttpException('Error uploading file', HttpStatus.BAD_REQUEST);
-    });
+  async upload(file: Express.Multer.File, bucket: string = this.bucket) {
+    const objectName = file.originalname;
 
-    return `${this.endpoint}:${this.port}/${this.bucket}/${file.originalname}`;
+    await this.minioClient.putObject(bucket, objectName, file.buffer);
+
+    const url = await this.minioClient.presignedUrl('GET', bucket, objectName);
+
+    return url;
   }
 
   remove(objetName: string, baseBucket: string = this.bucket) {
-    return this.client.removeObject(baseBucket, objetName);
+    return this.minioClient.removeObject(baseBucket, objetName);
   }
 }

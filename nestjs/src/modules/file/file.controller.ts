@@ -16,7 +16,7 @@ import { FileService } from './file.service';
 export class FileController {
   constructor(private fileService: FileService) {}
 
-  @Post('upload')
+  @Post()
   @UseInterceptors(FilesInterceptor('files'))
   upload(@UploadedFiles() files: Array<Express.Multer.File>) {
     return this.fileService.upload(files);
